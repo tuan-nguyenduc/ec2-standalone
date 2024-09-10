@@ -11,7 +11,7 @@ terraform {
 
 provider "aws" {
   region  = "ap-southeast-1"
-  profile = "saa-account"
+  profile = "default"
 }
 
 module "aws_standalone_ec2" {
@@ -20,7 +20,7 @@ module "aws_standalone_ec2" {
   environment         = "dut"
   instance_type       = "t3.nano"
   associate_public_ip = true
-  ami_id              = "ami-01811d4912b4ccb26"
+  os = "Ubuntu"
   # subnet_id      = "subnet-04e0e7c6b5dcd539d"
   # subnet_name    = "DefaultPublicSubnetCreatedByIDP"
   subnet_name            = "NoneDefault"

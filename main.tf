@@ -7,7 +7,7 @@ resource "aws_key_pair" "pubkey" {
 }
 
 resource "aws_instance" "this" {
-  ami                         = var.ami_id
+  ami                         = var.os == "Ubuntu" ? "ami-0497a974f8d5dcef8" : "ami-04a5ce820a419d6da"
   instance_type               = var.instance_type
   subnet_id                   = coalesce(var.subnet_id, data.aws_subnet.selected.id)
   associate_public_ip_address = try(var.associate_public_ip, false)

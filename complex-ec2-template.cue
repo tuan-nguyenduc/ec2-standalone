@@ -4,19 +4,15 @@
     provider: #provider_aws
     name: string
     environment: string
-    environment: *"sit"| "uat" | "prod"
     instance_type: *"t2.micro" | "t2.nano" | "t2.small" | "t2.medium" | "t2.large" | "t2.xlarge" | "t2.2xlarge"
-    ami_id: string | *"ami-0c55b159cbfafe1f0"
+    os: *"Ubuntu" | "Amazon Linux"
     create_new_key: bool | *true
     public_key: string
     public_ip: bool | *true
+    key_pair_name: string | *null
     detailed_monitoring: bool | *false
     user_data: string | *null
-    tags: [string]: string | *{}
-
     subnet_name: string | *"DefaultPublicSubnetCreatedByIDP"
-    key_pair_name: string | *null
-    eip_id: string | *null
     user_data_base64: string | *""
     iam_role_name: string | *null
     encrypt_volumes: bool | *true
@@ -29,13 +25,14 @@
     volume_tags: [string]: string | *{}
     instance_tags: [string]: string | *{}
     instance_desired_state: *"running" | "stopped"
+    tags: [string]: string | *{}
 }
 
 template: {
     components: [
       {
-        name: "aws-standalone-ec2"
-        type: "aws-standalone-ec2"
+        name: "aws-standalone-ec2-advanced"
+        type: "aws-standalone-ec2-advanced"
         properties: {
             providerRef: {
               name: parameter.provider
@@ -43,18 +40,14 @@ template: {
             name: parameter.name
             environment: parameter.environment
             instance_type: parameter.instance_type
-            ami_id: parameter.ami_id
+            os: parameter.os
             create_new_key: parameter.create_new_key
-            key_pair_name: parameter.name
             pubkey: parameter.public_key
             associate_public_ip: parameter.public_ip
             detailed_monitoring: parameter.detailed_monitoring
             user_data: parameter.user_data
-            tags: parameter.tags
-
             subnet_name: parameter.subnet_name
             key_pair_name: parameter.key_pair_name
-            eip_id: parameter.eip_id
             user_data_base64: parameter.user_data_base64
             iam_role_name: parameter.iam_role_name
             encrypt_volumes: parameter.encrypt_volumes
@@ -67,6 +60,7 @@ template: {
             volume_tags: parameter.volume_tags
             instance_tags: parameter.instance_tags
             instance_desired_state: parameter.instance_desired_state
+            tags: parameter.tags
         }
       }
     ]

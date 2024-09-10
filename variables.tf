@@ -14,7 +14,7 @@ variable "instance_type" {
   type        = string
 }
 
-variable "ami_id" {
+variable "os" {
   description = "AMI ID for launching this instance"
   type        = string
 }

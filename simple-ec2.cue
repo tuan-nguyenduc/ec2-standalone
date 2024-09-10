@@ -13,8 +13,8 @@
 template: {
     components: [
       {
-        name: "aws-standalone-ec2"
-        type: "aws-standalone-ec2"
+        name: "aws-standalone-ec2-basic"
+        type: "aws-standalone-ec2-basic"
         properties: {
             providerRef: {
               name: parameter.provider
